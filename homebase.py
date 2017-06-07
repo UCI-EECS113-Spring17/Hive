@@ -7,6 +7,7 @@ from pynq.iop import PMODA
 from pynq.iop import PMODB
 from pynq.iop import ARDUINO
 from pynq.iop import PMOD_GROVE_G1
+from pynq.iop import PMOD_GROVE_G2
 from pynq.iop import PMOD_GROVE_G3
 from pynq.iop import PMOD_GROVE_G4
 from pynq.iop import Grove_Light
@@ -16,8 +17,8 @@ from pynq.iop import ARDUINO_GROVE_I2C
 from pynq.iop import grove_th02
 
 def main():
-    print("Temperature and Humidity: ", readTH02())
-    # print("Light: ", readLight())
+    print("Temperature (Celcius) and Humidity (RH): ", readTH02())
+    print("Light (kOhm; the lower the value, the higher the light intensity): ", readLight())
     print("Motion: ", readMotion())
     
 def readTH02():
@@ -25,8 +26,8 @@ def readTH02():
     return values.read()
     
 def readLight():
-    adc = Grove_ADC(ARDUINO,PMOD_GROVE_G4)
-    light = Grove_Light(ARDUINO,PMOD_GROVE_G4)
+    adc = Grove_ADC(ARDUINO, ARDUINO_GROVE_I2C)
+    light = Grove_Light(ARDUINO, ARDUINO_GROVE_I2C)
     return light.read()
 
 def readMotion():
